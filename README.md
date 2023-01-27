@@ -1,5 +1,5 @@
 ## STM32F070RB
-STM32F070RB an ARM Cortex-M0 based microcontroller. In this Repository I will explore the use of this microcontroller. I Used the STM32CubeIDE for this project.
+STM32F070RB an ARM Cortex-M0 based microcontroller. In this Repository I will explore the use of this microcontroller. I used the STM32CubeIDE for this project.
 # LED Toggle Using Memory Address (0_led_toggle_addr)
 This code is for an STM32F070RB microcontroller, which is an ARM Cortex-M0 based microcontroller. The code is written in C and it configures the microcontroller's General-Purpose Input/Output (GPIO) pins to blink an LED.
 
