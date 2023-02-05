@@ -1,8 +1,11 @@
+##Introduction
+In this Repository, I will extensively explore and document the use of this microcontroller and understanding of its function. I will create simple functions to demontstrate a feature of this device. Each involvement of a feature is distinguished by its number prefixed onto the section name. The aim of this repository is to aid in the understanding of ARM Cortex STM32 based MCUs, it can be translated very easily onto different models you would just have to check the relevant datasheet, reference manual, and user manual for your MCU/devkit and use the correct memory addresses for peripheral function or a HAL. I used the STM32CubeIDE for this project.
+
 ## STM32F070RB
-STM32F070RB an ARM Cortex-M0 based microcontroller. In this Repository I will explore the use of this microcontroller. I used the STM32CubeIDE for this project.
+STM32F070RB an ARM Cortex-M0 based microcontroller. 
+
 # LED Toggle Using Memory Address (0_led_toggle_addr)
 The code is written in the main.c file and configures the microcontroller's General-Purpose Input/Output (GPIO) pins to have a blinking LED.
-
 
 The code has manually defined memory addresses and registers related to the microcontroller's clock, GPIO, and RCC (Reset and Clock Control) modules. These definitions allow the code to access specific registers and memory locations within the microcontroller in order to control its behavior.
 
@@ -33,7 +36,7 @@ This code performs the following tasks:
 2. Configures pin 5 on the GPIOA port as an output pin. It sets the 10th bit in the GPIOA MODER (mode) register to 1 (output) and clears the 11th bit in the same register to 0 (input). 
 3. In an infinite loop, toggles the state of pin 5 on the GPIOA port by using the bitwise exclusive OR operator (^=) on the GPIOA ODR (output data) register and the LED_PIN value, which is defined as PIN5. Before each iteration of the loop, the code waits for 100000 iterations of an empty for loop. This is used to create a delay between toggles.
 
-The main difference between this and 1_led_toggle_addr_struct is that one has manually defined the required data structures and memory offsets to access different peripherals and registers of the STM32F070RB microcontroller, while this one includes the "stm32f0xx.h" header file which is a standard peripheral library header file for STM32F0xx devices from the STM32Cube MCU Package for STM32F0 series that includes definitions for all peripherals, including the RCC and GPIOA peripherals. 
+The main difference between this and 1_led_toggle_addr_struct is that it has manually defined the required data structures and memory offsets to access different peripherals and registers of the STM32F070RB microcontroller, while this one includes the "stm32f0xx.h" header file which is a standard peripheral library header file for STM32F0xx devices from the STM32Cube MCU Package for STM32F0 series that includes definitions for all peripherals, including the RCC and GPIOA peripherals. 
 
 PS: In this code we use a hardware abstraction layer (HAL) as it defines a set of routines, protocols and tools for interacting with the hardware.
 
