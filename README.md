@@ -51,3 +51,7 @@ The code performs the following tasks:
 
 The changes from the previous code is as follows:
 1. Instead of using the ODR register to toggle the state of the LED, the code uses the bit set reset register (BSRR) to set (1) and reset (0) the LED pin.
+# Configuring GPIO Input for LED button press (4_gpio_input)
+In this code two ports, GPIOA and GPIOC, are used and one pin from each port is set as an output (GPIOA Pin 5) and input (GPIOC Pin 13) respectively. The code also enables clock access to the two ports by setting the appropriate bits in the RCC AHBENR register.
+
+In the infinite loop, the code checks the state of the input pin, or otherwise the button in this case (PC13) by reading its value from the GPIOC input data register (IDR). If the button is not pressed (it is at a high state), the LED on GPIOA Pin 5 is turned on by setting the corresponding bit in the GPIOA BSRR register. If the button is pressed (it is at a low state), the LED on GPIOA Pin 5 is turned off by resetting the corresponding bit in the GPIOA BSRR register.
