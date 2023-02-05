@@ -42,4 +42,12 @@ PS: In this code we use a hardware abstraction layer (HAL) as it defines a set o
 
 This means that the second code uses the definitions and declarations already provided in the header file, whereas in the first code, the required definitions and memory offsets are defined manually. This makes the second code more concise and readable compared to the first one, but at the same time, it relies on the header file to be present and up-to-date with the correct definitions.
 
+From this section to the end I will be using the HAL
+# LED toggle using Bit Set Reset Register (3_gpio_bsrr)
+The code performs the following tasks:
+1. Enables clock access to the GPIOA port by setting the 17th bit in the RCC AHB register.
+2. Sets Pin 5 of GPIOA as an output pin using the MODER register, by setting the 10th bit using the bitwise OR operator(|=) and clearing the 11th bit using the bitwise AND and NOT operator (&= ~).
+3. In a continuous loop, the code sets the Pin 5 of GPIOA (PA5) high by setting the 5th bit in the BSRR register. After a delay of 100000 cycles, the code then sets the Pin 5 of GPIOA low by resetting the 21st bit in the BSRR register.
 
+The changes from the previous code is as follows:
+1. Instead of using the ODR register to toggle the state of the LED, the code uses the bit set reset register (BSRR) to set (1) and reset (0) the LED pin.
