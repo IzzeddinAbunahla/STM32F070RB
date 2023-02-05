@@ -55,3 +55,19 @@ The changes from the previous code is as follows:
 In this code two ports, GPIOA and GPIOC, are used and one pin from each port is set as an output (GPIOA Pin 5) and input (GPIOC Pin 13) respectively. The code also enables clock access to the two ports by setting the appropriate bits in the RCC AHBENR register.
 
 In the infinite loop, the code checks the state of the input pin, or otherwise the button in this case (PC13) by reading its value from the GPIOC input data register (IDR). If the button is not pressed (it is at a high state), the LED on GPIOA Pin 5 is turned on by setting the corresponding bit in the GPIOA BSRR register. If the button is pressed (it is at a low state), the LED on GPIOA Pin 5 is turned off by resetting the corresponding bit in the GPIOA BSRR register.
+
+1. The code starts by including the header file "stm32f0xx.h", which contains definitions and prototypes for the STM32F070RB microcontroller.
+2. Then, three macros are defined:
+  1. GPIO_A_EN sets the 17th bit of the RCC AHB (Advanced High-performance Bus) register, which enables the clock access to GPIOA.
+  2. GPIO_C_EN sets the 19th bit of the RCC AHB register, which enables the clock access to GPIOC.
+  3. PIN5 sets the 5th bit location in the GPIOA register, which represents pin 5 of GPIOA.
+  4. PIN13 sets the 13th bit location in the GPIOC register, which represents pin 13 of GPIOC.
+  5. LED_PIN is defined as PIN5.
+  6. BTN_PIN is defined as PIN13.
+3. The main function starts with enabling the clock access to both GPIOA and GPIOC using the RCC AHBENR register.
+4. Then, pin 5 of GPIOA is set as an output pin by setting the 10th bit of the GPIOA MODER (mode) register to 1, and the 11th bit to 0.
+5. Pin 13 of GPIOC is set as an input pin by clearing the 26th and 27th bits of the GPIOC MODER register.
+6. The program enters an infinite loop. In the loop, the state of the input pin PC13 is checked using the IDR (input data) register.
+  1. If the state of the pin is high (the button is not pressed), the LED is turned on by setting the 5th bit of the GPIOA BSRR (bit set/reset) register.
+  2. If the state of the pin is low (the button is pressed), the LED is turned off by resetting the 21st bit of the GPIOA BSRR register.
+  3. The loop repeats indefinitely, continuously checking the state of the button and turning the LED on or off accordingly.
