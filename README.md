@@ -1,8 +1,8 @@
-## Introduction
+# Introduction
 In this Repository, I will extensively explore and document the use of this microcontroller and understanding of its function. I will create simple functions to demontstrate a feature of this device. Each involvement of a feature is distinguished by its number prefixed onto the section name. The aim of this repository is to aid in the understanding of ARM Cortex STM32 based MCUs, it can be translated very easily onto different models you would just have to check the relevant datasheet, reference manual, and user manual for your MCU/devkit and use the correct memory addresses for peripheral function or a HAL. I used the STM32CubeIDE for this project.
 
-## STM32F070RB
-STM32F070RB an ARM Cortex-M0 based microcontroller. 
+## What Hardware did i use?
+In this project i used the STM32F070RB, it is an ARM Cortex-M0 based microcontroller. 
 
 # LED Toggle Using Memory Address (0_led_toggle_addr)
 The code is written in the main.c file and configures the microcontroller's General-Purpose Input/Output (GPIO) pins to have a blinking LED.
