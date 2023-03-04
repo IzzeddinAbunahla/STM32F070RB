@@ -60,8 +60,8 @@ all: main-build
 main-build: 10_adc_continuousconversion.elf secondary-outputs
 
 # Tool invocations
-10_adc_continuousconversion.elf 10_adc_continuousconversion.map: $(OBJS) $(USER_OBJS) /Users/Izzel/Documents/STM32F070RB/10_adc_continuousconversion/STM32F070RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "10_adc_continuousconversion.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0 -T"/Users/Izzel/Documents/STM32F070RB/10_adc_continuousconversion/STM32F070RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="10_adc_continuousconversion.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+10_adc_continuousconversion.elf 10_adc_continuousconversion.map: $(OBJS) $(USER_OBJS) /Users/Izzel/Documents/STM32Workspace/STM32F070RB/10_adc_continuousconversion/STM32F070RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "10_adc_continuousconversion.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0 -T"/Users/Izzel/Documents/STM32Workspace/STM32F070RB/10_adc_continuousconversion/STM32F070RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="10_adc_continuousconversion.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
