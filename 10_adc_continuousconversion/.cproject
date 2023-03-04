@@ -49,8 +49,8 @@
 									<listOptionValue builtIn="false" value="../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy"/>
 									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Device/ST/STM32F0xx/Include"/>
 									<listOptionValue builtIn="false" value="../Drivers/CMSIS/Include"/>
-									<listOptionValue builtIn="false" value="/Users/Izzel/Documents/STM32F070RB/chip_headers/CMSIS/Device/ST/STM32F0xx/Include"/>
-									<listOptionValue builtIn="false" value="/Users/Izzel/Documents/STM32F070RB/chip_headers/CMSIS/Include"/>
+									<listOptionValue builtIn="false" value="/Users/Izzel/Documents/STM32Workspace/STM32F070RB/chip_headers/CMSIS/Device/ST/STM32F0xx/Include"/>
+									<listOptionValue builtIn="false" value="/Users/Izzel/Documents/STM32Workspace/STM32F070RB/chip_headers/CMSIS/Include"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.1332152638" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
 							</tool>
