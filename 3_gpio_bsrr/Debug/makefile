@@ -59,8 +59,8 @@ all: main-build
 main-build: 3_gpio_bsrr.elf secondary-outputs
 
 # Tool invocations
-3_gpio_bsrr.elf 3_gpio_bsrr.map: $(OBJS) $(USER_OBJS) C:\Users\Izzel\Documents\School\Engineering\ Physics\ V\ 2022-2023\Embedded\STM32\ Baremetal\ Workspace\3_gpio_bsrr\STM32F070RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "3_gpio_bsrr.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0 -T"C:\Users\Izzel\Documents\School\Engineering Physics V 2022-2023\Embedded\STM32 Baremetal Workspace\3_gpio_bsrr\STM32F070RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="3_gpio_bsrr.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+3_gpio_bsrr.elf 3_gpio_bsrr.map: $(OBJS) $(USER_OBJS) /Users/Izzel/Documents/STM32Workspace/STM32F070RB/3_gpio_bsrr/STM32F070RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "3_gpio_bsrr.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0 -T"/Users/Izzel/Documents/STM32Workspace/STM32F070RB/3_gpio_bsrr/STM32F070RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="3_gpio_bsrr.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

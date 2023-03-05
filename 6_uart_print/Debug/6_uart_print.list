@@ -240,23 +240,14 @@ Disassembly of section .text:
  8000232:	46c0      	nop			; (mov r8, r8)
 
 08000234 <__io_putchar>:
-
-void uart2_write(int ch);
-void uar2_tx_init(void);
-
-int __io_putchar(int ch) //for redirecting printf
-{
  8000234:	b580      	push	{r7, lr}
  8000236:	b082      	sub	sp, #8
  8000238:	af00      	add	r7, sp, #0
  800023a:	6078      	str	r0, [r7, #4]
-	uart2_write(ch);
  800023c:	687b      	ldr	r3, [r7, #4]
  800023e:	0018      	movs	r0, r3
  8000240:	f000 f872 	bl	8000328 <uart2_write>
-	return ch;
  8000244:	687b      	ldr	r3, [r7, #4]
-}
  8000246:	0018      	movs	r0, r3
  8000248:	46bd      	mov	sp, r7
  800024a:	b002      	add	sp, #8
@@ -264,17 +255,9 @@ int __io_putchar(int ch) //for redirecting printf
 	...
 
 08000250 <main>:
-
-int main (void)
-{
  8000250:	b580      	push	{r7, lr}
  8000252:	af00      	add	r7, sp, #0
-		uar2_tx_init();
  8000254:	f000 f808 	bl	8000268 <uar2_tx_init>
-		while(1)
-		{
-			//uart2_write('Y');
-			printf("Welcome from the STM32..\n\r");
  8000258:	4b02      	ldr	r3, [pc, #8]	; (8000264 <main+0x14>)
  800025a:	0018      	movs	r0, r3
  800025c:	f000 f9ca 	bl	80005f4 <iprintf>
@@ -283,16 +266,8 @@ int main (void)
  8000264:	080015bc 	.word	0x080015bc
 
 08000268 <uar2_tx_init>:
-		}
-}
-
-void uar2_tx_init(void)
-{
  8000268:	b580      	push	{r7, lr}
  800026a:	af00      	add	r7, sp, #0
-	/*Configure UART GPIO pin*/
-	//Enable clock access to GPIOA
-	RCC->AHBENR	|= GPIO_A_EN;
  800026c:	4b28      	ldr	r3, [pc, #160]	; (8000310 <uar2_tx_init+0xa8>)
  800026e:	695a      	ldr	r2, [r3, #20]
  8000270:	4b27      	ldr	r3, [pc, #156]	; (8000310 <uar2_tx_init+0xa8>)
@@ -300,8 +275,6 @@ void uar2_tx_init(void)
  8000274:	0289      	lsls	r1, r1, #10
  8000276:	430a      	orrs	r2, r1
  8000278:	615a      	str	r2, [r3, #20]
-	//set TX pin (PA2) mode to alternate function mode
-	GPIOA->MODER &= ~(1U<<4); //bitwise AND(&=), NOT(~) to set it to 0
  800027a:	2390      	movs	r3, #144	; 0x90
  800027c:	05db      	lsls	r3, r3, #23
  800027e:	681a      	ldr	r2, [r3, #0]
@@ -310,7 +283,6 @@ void uar2_tx_init(void)
  8000284:	2110      	movs	r1, #16
  8000286:	438a      	bics	r2, r1
  8000288:	601a      	str	r2, [r3, #0]
-	GPIOA->MODER |= (1U<<5); //bitwise OR(|=) to set it to 1
  800028a:	2390      	movs	r3, #144	; 0x90
  800028c:	05db      	lsls	r3, r3, #23
  800028e:	681a      	ldr	r2, [r3, #0]
@@ -319,8 +291,6 @@ void uar2_tx_init(void)
  8000294:	2120      	movs	r1, #32
  8000296:	430a      	orrs	r2, r1
  8000298:	601a      	str	r2, [r3, #0]
-	//set PA2 alternate function type to UART_TX (AF1) 0001:AF1 (index 0 for AFRL index 1 for AFRH)
-	GPIOA->AFR[0] |= (1U<<8); //bitwise OR(|=) to set it to 1
  800029a:	2390      	movs	r3, #144	; 0x90
  800029c:	05db      	lsls	r3, r3, #23
  800029e:	6a1a      	ldr	r2, [r3, #32]
@@ -330,7 +300,6 @@ void uar2_tx_init(void)
  80002a6:	0049      	lsls	r1, r1, #1
  80002a8:	430a      	orrs	r2, r1
  80002aa:	621a      	str	r2, [r3, #32]
-	GPIOA->AFR[0] &= ~(1U<<9); //bitwise AND(&=), NOT(~) to set it to 0
  80002ac:	2390      	movs	r3, #144	; 0x90
  80002ae:	05db      	lsls	r3, r3, #23
  80002b0:	6a1a      	ldr	r2, [r3, #32]
@@ -339,7 +308,6 @@ void uar2_tx_init(void)
  80002b6:	4917      	ldr	r1, [pc, #92]	; (8000314 <uar2_tx_init+0xac>)
  80002b8:	400a      	ands	r2, r1
  80002ba:	621a      	str	r2, [r3, #32]
-	GPIOA->AFR[0] &= ~(1U<<10); //bitwise AND(&=), NOT(~) to set it to 0
  80002bc:	2390      	movs	r3, #144	; 0x90
  80002be:	05db      	lsls	r3, r3, #23
  80002c0:	6a1a      	ldr	r2, [r3, #32]
@@ -348,7 +316,6 @@ void uar2_tx_init(void)
  80002c6:	4914      	ldr	r1, [pc, #80]	; (8000318 <uar2_tx_init+0xb0>)
  80002c8:	400a      	ands	r2, r1
  80002ca:	621a      	str	r2, [r3, #32]
-	GPIOA->AFR[0] &= ~(1U<<11); //bitwise AND(&=), NOT(~) to set it to 0
  80002cc:	2390      	movs	r3, #144	; 0x90
  80002ce:	05db      	lsls	r3, r3, #23
  80002d0:	6a1a      	ldr	r2, [r3, #32]
@@ -357,9 +324,6 @@ void uar2_tx_init(void)
  80002d6:	4911      	ldr	r1, [pc, #68]	; (800031c <uar2_tx_init+0xb4>)
  80002d8:	400a      	ands	r2, r1
  80002da:	621a      	str	r2, [r3, #32]
-	/*Configure UART GPIO pin*/
-	//Enable clock access to UART2
-	RCC->APB1ENR |= UART2EN;
  80002dc:	4b0c      	ldr	r3, [pc, #48]	; (8000310 <uar2_tx_init+0xa8>)
  80002de:	69da      	ldr	r2, [r3, #28]
  80002e0:	4b0b      	ldr	r3, [pc, #44]	; (8000310 <uar2_tx_init+0xa8>)
@@ -367,28 +331,21 @@ void uar2_tx_init(void)
  80002e4:	0289      	lsls	r1, r1, #10
  80002e6:	430a      	orrs	r2, r1
  80002e8:	61da      	str	r2, [r3, #28]
-	//Configure UART baud-rate
-	uart_set_baudrate(USART2,APB1_CLK,UART_BAUDRATE);
  80002ea:	2396      	movs	r3, #150	; 0x96
  80002ec:	019b      	lsls	r3, r3, #6
  80002ee:	490c      	ldr	r1, [pc, #48]	; (8000320 <uar2_tx_init+0xb8>)
  80002f0:	480c      	ldr	r0, [pc, #48]	; (8000324 <uar2_tx_init+0xbc>)
  80002f2:	001a      	movs	r2, r3
  80002f4:	f000 f830 	bl	8000358 <uart_set_baudrate>
-	//Configure the transfer direction
-	USART2->CR1 = CR1_TE;
  80002f8:	4b0a      	ldr	r3, [pc, #40]	; (8000324 <uar2_tx_init+0xbc>)
  80002fa:	2208      	movs	r2, #8
  80002fc:	601a      	str	r2, [r3, #0]
-	//Enable UART module
-	USART2->CR1 |= CR1_UART_EN;
  80002fe:	4b09      	ldr	r3, [pc, #36]	; (8000324 <uar2_tx_init+0xbc>)
  8000300:	681a      	ldr	r2, [r3, #0]
  8000302:	4b08      	ldr	r3, [pc, #32]	; (8000324 <uar2_tx_init+0xbc>)
  8000304:	2101      	movs	r1, #1
  8000306:	430a      	orrs	r2, r1
  8000308:	601a      	str	r2, [r3, #0]
-}
  800030a:	46c0      	nop			; (mov r8, r8)
  800030c:	46bd      	mov	sp, r7
  800030e:	bd80      	pop	{r7, pc}
@@ -400,23 +357,16 @@ void uar2_tx_init(void)
  8000324:	40004400 	.word	0x40004400
 
 08000328 <uart2_write>:
-void uart2_write(int ch)
-{
  8000328:	b580      	push	{r7, lr}
  800032a:	b082      	sub	sp, #8
  800032c:	af00      	add	r7, sp, #0
  800032e:	6078      	str	r0, [r7, #4]
-	/*Make sure the transmit data register is empty*/
-	while(!(USART2->ISR & SR_TXE))
  8000330:	46c0      	nop			; (mov r8, r8)
  8000332:	4b08      	ldr	r3, [pc, #32]	; (8000354 <uart2_write+0x2c>)
  8000334:	69db      	ldr	r3, [r3, #28]
  8000336:	2280      	movs	r2, #128	; 0x80
  8000338:	4013      	ands	r3, r2
  800033a:	d0fa      	beq.n	8000332 <uart2_write+0xa>
-	{}
-	/*Write to transmit data register*/
-	USART2->TDR = (ch & 0xFF); //we perform AND operation because we want to transmit eight bits
  800033c:	687b      	ldr	r3, [r7, #4]
  800033e:	b29b      	uxth	r3, r3
  8000340:	4a04      	ldr	r2, [pc, #16]	; (8000354 <uart2_write+0x2c>)
@@ -424,8 +374,6 @@ void uart2_write(int ch)
  8000344:	400b      	ands	r3, r1
  8000346:	b29b      	uxth	r3, r3
  8000348:	8513      	strh	r3, [r2, #40]	; 0x28
-/*“& 0xff” effectively masks the variable so it leaves only the value in the last 8 bits, and ignores all the rest of the bits*/
-}
  800034a:	46c0      	nop			; (mov r8, r8)
  800034c:	46bd      	mov	sp, r7
  800034e:	b002      	add	sp, #8
@@ -434,16 +382,12 @@ void uart2_write(int ch)
  8000354:	40004400 	.word	0x40004400
 
 08000358 <uart_set_baudrate>:
-
-static void uart_set_baudrate(USART_TypeDef *USARTx, uint32_t PeriphClk, uint32_t Baudrate)
-{
  8000358:	b580      	push	{r7, lr}
  800035a:	b084      	sub	sp, #16
  800035c:	af00      	add	r7, sp, #0
  800035e:	60f8      	str	r0, [r7, #12]
  8000360:	60b9      	str	r1, [r7, #8]
  8000362:	607a      	str	r2, [r7, #4]
-	USARTx->BRR = compute_uart_BD(PeriphClk, Baudrate);
  8000364:	687a      	ldr	r2, [r7, #4]
  8000366:	68bb      	ldr	r3, [r7, #8]
  8000368:	0011      	movs	r1, r2
@@ -453,21 +397,17 @@ static void uart_set_baudrate(USART_TypeDef *USARTx, uint32_t PeriphClk, uint32_
  8000372:	001a      	movs	r2, r3
  8000374:	68fb      	ldr	r3, [r7, #12]
  8000376:	60da      	str	r2, [r3, #12]
-}
  8000378:	46c0      	nop			; (mov r8, r8)
  800037a:	46bd      	mov	sp, r7
  800037c:	b004      	add	sp, #16
  800037e:	bd80      	pop	{r7, pc}
 
 08000380 <compute_uart_BD>:
-static uint16_t compute_uart_BD(uint32_t PeriphClk, uint32_t Baudrate)
-{
  8000380:	b580      	push	{r7, lr}
  8000382:	b082      	sub	sp, #8
  8000384:	af00      	add	r7, sp, #0
  8000386:	6078      	str	r0, [r7, #4]
  8000388:	6039      	str	r1, [r7, #0]
-	return ((PeriphClk + (Baudrate/2U))/Baudrate);
  800038a:	683b      	ldr	r3, [r7, #0]
  800038c:	085a      	lsrs	r2, r3, #1
  800038e:	687b      	ldr	r3, [r7, #4]
@@ -477,125 +417,53 @@ static uint16_t compute_uart_BD(uint32_t PeriphClk, uint32_t Baudrate)
  8000396:	f7ff fec1 	bl	800011c <__udivsi3>
  800039a:	0003      	movs	r3, r0
  800039c:	b29b      	uxth	r3, r3
-}
  800039e:	0018      	movs	r0, r3
  80003a0:	46bd      	mov	sp, r7
  80003a2:	b002      	add	sp, #8
  80003a4:	bd80      	pop	{r7, pc}
 
 080003a6 <NMI_Handler>:
-/******************************************************************************/
-/**
-  * @brief This function handles Non maskable interrupt.
-  */
-void NMI_Handler(void)
-{
  80003a6:	b580      	push	{r7, lr}
  80003a8:	af00      	add	r7, sp, #0
-  /* USER CODE BEGIN NonMaskableInt_IRQn 0 */
-
-  /* USER CODE END NonMaskableInt_IRQn 0 */
-  /* USER CODE BEGIN NonMaskableInt_IRQn 1 */
-  while (1)
  80003aa:	e7fe      	b.n	80003aa <NMI_Handler+0x4>
 
 080003ac <HardFault_Handler>:
-
-/**
-  * @brief This function handles Hard fault interrupt.
-  */
-void HardFault_Handler(void)
-{
  80003ac:	b580      	push	{r7, lr}
  80003ae:	af00      	add	r7, sp, #0
-  /* USER CODE BEGIN HardFault_IRQn 0 */
-
-  /* USER CODE END HardFault_IRQn 0 */
-  while (1)
  80003b0:	e7fe      	b.n	80003b0 <HardFault_Handler+0x4>
 
 080003b2 <SVC_Handler>:
-
-/**
-  * @brief This function handles System service call via SWI instruction.
-  */
-void SVC_Handler(void)
-{
  80003b2:	b580      	push	{r7, lr}
  80003b4:	af00      	add	r7, sp, #0
-
-  /* USER CODE END SVC_IRQn 0 */
-  /* USER CODE BEGIN SVC_IRQn 1 */
-
-  /* USER CODE END SVC_IRQn 1 */
-}
  80003b6:	46c0      	nop			; (mov r8, r8)
  80003b8:	46bd      	mov	sp, r7
  80003ba:	bd80      	pop	{r7, pc}
 
 080003bc <PendSV_Handler>:
-
-/**
-  * @brief This function handles Pendable request for system service.
-  */
-void PendSV_Handler(void)
-{
  80003bc:	b580      	push	{r7, lr}
  80003be:	af00      	add	r7, sp, #0
-
-  /* USER CODE END PendSV_IRQn 0 */
-  /* USER CODE BEGIN PendSV_IRQn 1 */
-
-  /* USER CODE END PendSV_IRQn 1 */
-}
  80003c0:	46c0      	nop			; (mov r8, r8)
  80003c2:	46bd      	mov	sp, r7
  80003c4:	bd80      	pop	{r7, pc}
 
 080003c6 <SysTick_Handler>:
-
-/**
-  * @brief This function handles System tick timer.
-  */
-void SysTick_Handler(void)
-{
  80003c6:	b580      	push	{r7, lr}
  80003c8:	af00      	add	r7, sp, #0
-  /* USER CODE BEGIN SysTick_IRQn 0 */
-
-  /* USER CODE END SysTick_IRQn 0 */
-  HAL_IncTick();
  80003ca:	f000 f8cf 	bl	800056c <HAL_IncTick>
-  /* USER CODE BEGIN SysTick_IRQn 1 */
-
-  /* USER CODE END SysTick_IRQn 1 */
-}
  80003ce:	46c0      	nop			; (mov r8, r8)
  80003d0:	46bd      	mov	sp, r7
  80003d2:	bd80      	pop	{r7, pc}
 
 080003d4 <_read>:
-  _kill(status, -1);
-  while (1) {}    /* Make sure we hang here */
-}
-
-__attribute__((weak)) int _read(int file, char *ptr, int len)
-{
  80003d4:	b580      	push	{r7, lr}
  80003d6:	b086      	sub	sp, #24
  80003d8:	af00      	add	r7, sp, #0
  80003da:	60f8      	str	r0, [r7, #12]
  80003dc:	60b9      	str	r1, [r7, #8]
  80003de:	607a      	str	r2, [r7, #4]
-  (void)file;
-  int DataIdx;
-
-  for (DataIdx = 0; DataIdx < len; DataIdx++)
  80003e0:	2300      	movs	r3, #0
  80003e2:	617b      	str	r3, [r7, #20]
  80003e4:	e00a      	b.n	80003fc <_read+0x28>
-  {
-    *ptr++ = __io_getchar();
  80003e6:	e000      	b.n	80003ea <_read+0x16>
  80003e8:	bf00      	nop
  80003ea:	0001      	movs	r1, r0
@@ -604,7 +472,6 @@ __attribute__((weak)) int _read(int file, char *ptr, int len)
  80003f0:	60ba      	str	r2, [r7, #8]
  80003f2:	b2ca      	uxtb	r2, r1
  80003f4:	701a      	strb	r2, [r3, #0]
-  for (DataIdx = 0; DataIdx < len; DataIdx++)
  80003f6:	697b      	ldr	r3, [r7, #20]
  80003f8:	3301      	adds	r3, #1
  80003fa:	617b      	str	r3, [r7, #20]
@@ -612,42 +479,28 @@ __attribute__((weak)) int _read(int file, char *ptr, int len)
  80003fe:	687b      	ldr	r3, [r7, #4]
  8000400:	429a      	cmp	r2, r3
  8000402:	dbf0      	blt.n	80003e6 <_read+0x12>
-  }
-
-  return len;
  8000404:	687b      	ldr	r3, [r7, #4]
-}
  8000406:	0018      	movs	r0, r3
  8000408:	46bd      	mov	sp, r7
  800040a:	b006      	add	sp, #24
  800040c:	bd80      	pop	{r7, pc}
 
 0800040e <_write>:
-
-__attribute__((weak)) int _write(int file, char *ptr, int len)
-{
  800040e:	b580      	push	{r7, lr}
  8000410:	b086      	sub	sp, #24
  8000412:	af00      	add	r7, sp, #0
  8000414:	60f8      	str	r0, [r7, #12]
  8000416:	60b9      	str	r1, [r7, #8]
  8000418:	607a      	str	r2, [r7, #4]
-  (void)file;
-  int DataIdx;
-
-  for (DataIdx = 0; DataIdx < len; DataIdx++)
  800041a:	2300      	movs	r3, #0
  800041c:	617b      	str	r3, [r7, #20]
  800041e:	e009      	b.n	8000434 <_write+0x26>
-  {
-    __io_putchar(*ptr++);
  8000420:	68bb      	ldr	r3, [r7, #8]
  8000422:	1c5a      	adds	r2, r3, #1
  8000424:	60ba      	str	r2, [r7, #8]
  8000426:	781b      	ldrb	r3, [r3, #0]
  8000428:	0018      	movs	r0, r3
  800042a:	f7ff ff03 	bl	8000234 <__io_putchar>
-  for (DataIdx = 0; DataIdx < len; DataIdx++)
  800042e:	697b      	ldr	r3, [r7, #20]
  8000430:	3301      	adds	r3, #1
  8000432:	617b      	str	r3, [r7, #20]
@@ -655,90 +508,59 @@ __attribute__((weak)) int _write(int file, char *ptr, int len)
  8000436:	687b      	ldr	r3, [r7, #4]
  8000438:	429a      	cmp	r2, r3
  800043a:	dbf1      	blt.n	8000420 <_write+0x12>
-  }
-  return len;
  800043c:	687b      	ldr	r3, [r7, #4]
-}
  800043e:	0018      	movs	r0, r3
  8000440:	46bd      	mov	sp, r7
  8000442:	b006      	add	sp, #24
  8000444:	bd80      	pop	{r7, pc}
 
 08000446 <_close>:
-
-int _close(int file)
-{
  8000446:	b580      	push	{r7, lr}
  8000448:	b082      	sub	sp, #8
  800044a:	af00      	add	r7, sp, #0
  800044c:	6078      	str	r0, [r7, #4]
-  (void)file;
-  return -1;
  800044e:	2301      	movs	r3, #1
  8000450:	425b      	negs	r3, r3
-}
  8000452:	0018      	movs	r0, r3
  8000454:	46bd      	mov	sp, r7
  8000456:	b002      	add	sp, #8
  8000458:	bd80      	pop	{r7, pc}
 
 0800045a <_fstat>:
-
-
-int _fstat(int file, struct stat *st)
-{
  800045a:	b580      	push	{r7, lr}
  800045c:	b082      	sub	sp, #8
  800045e:	af00      	add	r7, sp, #0
  8000460:	6078      	str	r0, [r7, #4]
  8000462:	6039      	str	r1, [r7, #0]
-  (void)file;
-  st->st_mode = S_IFCHR;
  8000464:	683b      	ldr	r3, [r7, #0]
  8000466:	2280      	movs	r2, #128	; 0x80
  8000468:	0192      	lsls	r2, r2, #6
  800046a:	605a      	str	r2, [r3, #4]
-  return 0;
  800046c:	2300      	movs	r3, #0
-}
  800046e:	0018      	movs	r0, r3
  8000470:	46bd      	mov	sp, r7
  8000472:	b002      	add	sp, #8
  8000474:	bd80      	pop	{r7, pc}
 
 08000476 <_isatty>:
-
-int _isatty(int file)
-{
  8000476:	b580      	push	{r7, lr}
  8000478:	b082      	sub	sp, #8
  800047a:	af00      	add	r7, sp, #0
  800047c:	6078      	str	r0, [r7, #4]
-  (void)file;
-  return 1;
  800047e:	2301      	movs	r3, #1
-}
  8000480:	0018      	movs	r0, r3
  8000482:	46bd      	mov	sp, r7
  8000484:	b002      	add	sp, #8
  8000486:	bd80      	pop	{r7, pc}
 
 08000488 <_lseek>:
-
-int _lseek(int file, int ptr, int dir)
-{
  8000488:	b580      	push	{r7, lr}
  800048a:	b084      	sub	sp, #16
  800048c:	af00      	add	r7, sp, #0
  800048e:	60f8      	str	r0, [r7, #12]
  8000490:	60b9      	str	r1, [r7, #8]
  8000492:	607a      	str	r2, [r7, #4]
-  (void)file;
-  (void)ptr;
-  (void)dir;
-  return 0;
  8000494:	2300      	movs	r3, #0
-}
  8000496:	0018      	movs	r0, r3
  8000498:	46bd      	mov	sp, r7
  800049a:	b004      	add	sp, #16
@@ -746,44 +568,23 @@ int _lseek(int file, int ptr, int dir)
 	...
 
 080004a0 <_sbrk>:
- *
- * @param incr Memory size
- * @return Pointer to allocated memory
- */
-void *_sbrk(ptrdiff_t incr)
-{
  80004a0:	b580      	push	{r7, lr}
  80004a2:	b086      	sub	sp, #24
  80004a4:	af00      	add	r7, sp, #0
  80004a6:	6078      	str	r0, [r7, #4]
-  extern uint8_t _end; /* Symbol defined in the linker script */
-  extern uint8_t _estack; /* Symbol defined in the linker script */
-  extern uint32_t _Min_Stack_Size; /* Symbol defined in the linker script */
-  const uint32_t stack_limit = (uint32_t)&_estack - (uint32_t)&_Min_Stack_Size;
  80004a8:	4a14      	ldr	r2, [pc, #80]	; (80004fc <_sbrk+0x5c>)
  80004aa:	4b15      	ldr	r3, [pc, #84]	; (8000500 <_sbrk+0x60>)
  80004ac:	1ad3      	subs	r3, r2, r3
  80004ae:	617b      	str	r3, [r7, #20]
-  const uint8_t *max_heap = (uint8_t *)stack_limit;
  80004b0:	697b      	ldr	r3, [r7, #20]
  80004b2:	613b      	str	r3, [r7, #16]
-  uint8_t *prev_heap_end;
-
-  /* Initialize heap end at first call */
-  if (NULL == __sbrk_heap_end)
  80004b4:	4b13      	ldr	r3, [pc, #76]	; (8000504 <_sbrk+0x64>)
  80004b6:	681b      	ldr	r3, [r3, #0]
  80004b8:	2b00      	cmp	r3, #0
  80004ba:	d102      	bne.n	80004c2 <_sbrk+0x22>
-  {
-    __sbrk_heap_end = &_end;
  80004bc:	4b11      	ldr	r3, [pc, #68]	; (8000504 <_sbrk+0x64>)
  80004be:	4a12      	ldr	r2, [pc, #72]	; (8000508 <_sbrk+0x68>)
  80004c0:	601a      	str	r2, [r3, #0]
-  }
-
-  /* Protect heap from growing into the reserved MSP stack */
-  if (__sbrk_heap_end + incr > max_heap)
  80004c2:	4b10      	ldr	r3, [pc, #64]	; (8000504 <_sbrk+0x64>)
  80004c4:	681a      	ldr	r2, [r3, #0]
  80004c6:	687b      	ldr	r3, [r7, #4]
@@ -791,33 +592,23 @@ void *_sbrk(ptrdiff_t incr)
  80004ca:	693a      	ldr	r2, [r7, #16]
  80004cc:	429a      	cmp	r2, r3
  80004ce:	d207      	bcs.n	80004e0 <_sbrk+0x40>
-  {
-    errno = ENOMEM;
  80004d0:	f000 f85e 	bl	8000590 <__errno>
  80004d4:	0003      	movs	r3, r0
  80004d6:	220c      	movs	r2, #12
  80004d8:	601a      	str	r2, [r3, #0]
-    return (void *)-1;
  80004da:	2301      	movs	r3, #1
  80004dc:	425b      	negs	r3, r3
  80004de:	e009      	b.n	80004f4 <_sbrk+0x54>
-  }
-
-  prev_heap_end = __sbrk_heap_end;
  80004e0:	4b08      	ldr	r3, [pc, #32]	; (8000504 <_sbrk+0x64>)
  80004e2:	681b      	ldr	r3, [r3, #0]
  80004e4:	60fb      	str	r3, [r7, #12]
-  __sbrk_heap_end += incr;
  80004e6:	4b07      	ldr	r3, [pc, #28]	; (8000504 <_sbrk+0x64>)
  80004e8:	681a      	ldr	r2, [r3, #0]
  80004ea:	687b      	ldr	r3, [r7, #4]
  80004ec:	18d2      	adds	r2, r2, r3
  80004ee:	4b05      	ldr	r3, [pc, #20]	; (8000504 <_sbrk+0x64>)
  80004f0:	601a      	str	r2, [r3, #0]
-
-  return (void *)prev_heap_end;
  80004f2:	68fb      	ldr	r3, [r7, #12]
-}
  80004f4:	0018      	movs	r0, r3
  80004f6:	46bd      	mov	sp, r7
  80004f8:	b006      	add	sp, #24
@@ -828,142 +619,63 @@ void *_sbrk(ptrdiff_t incr)
  8000508:	200000a0 	.word	0x200000a0
 
 0800050c <SystemInit>:
-  * @brief  Setup the microcontroller system
-  * @param  None
-  * @retval None
-  */
-void SystemInit(void)
-{
  800050c:	b580      	push	{r7, lr}
  800050e:	af00      	add	r7, sp, #0
-                         before branch to main program. This call is made inside
-                         the "startup_stm32f0xx.s" file.
-                         User can setups the default system clock (System clock source, PLL Multiplier
-                         and Divider factors, AHB/APBx prescalers and Flash settings).
-   */
-}
  8000510:	46c0      	nop			; (mov r8, r8)
  8000512:	46bd      	mov	sp, r7
  8000514:	bd80      	pop	{r7, pc}
 	...
 
 08000518 <Reset_Handler>:
-
-  .section .text.Reset_Handler
-  .weak Reset_Handler
-  .type Reset_Handler, %function
-Reset_Handler:
-  ldr   r0, =_estack
  8000518:	480d      	ldr	r0, [pc, #52]	; (8000550 <LoopForever+0x2>)
-  mov   sp, r0          /* set stack pointer */
  800051a:	4685      	mov	sp, r0
-
-/* Copy the data segment initializers from flash to SRAM */
-  ldr r0, =_sdata
  800051c:	480d      	ldr	r0, [pc, #52]	; (8000554 <LoopForever+0x6>)
-  ldr r1, =_edata
  800051e:	490e      	ldr	r1, [pc, #56]	; (8000558 <LoopForever+0xa>)
-  ldr r2, =_sidata
  8000520:	4a0e      	ldr	r2, [pc, #56]	; (800055c <LoopForever+0xe>)
-  movs r3, #0
  8000522:	2300      	movs	r3, #0
-  b LoopCopyDataInit
  8000524:	e002      	b.n	800052c <LoopCopyDataInit>
 
 08000526 <CopyDataInit>:
-
-CopyDataInit:
-  ldr r4, [r2, r3]
  8000526:	58d4      	ldr	r4, [r2, r3]
-  str r4, [r0, r3]
  8000528:	50c4      	str	r4, [r0, r3]
-  adds r3, r3, #4
  800052a:	3304      	adds	r3, #4
 
 0800052c <LoopCopyDataInit>:
-
-LoopCopyDataInit:
-  adds r4, r0, r3
  800052c:	18c4      	adds	r4, r0, r3
-  cmp r4, r1
  800052e:	428c      	cmp	r4, r1
-  bcc CopyDataInit
  8000530:	d3f9      	bcc.n	8000526 <CopyDataInit>
-  
-/* Zero fill the bss segment. */
-  ldr r2, =_sbss
  8000532:	4a0b      	ldr	r2, [pc, #44]	; (8000560 <LoopForever+0x12>)
-  ldr r4, =_ebss
  8000534:	4c0b      	ldr	r4, [pc, #44]	; (8000564 <LoopForever+0x16>)
-  movs r3, #0
  8000536:	2300      	movs	r3, #0
-  b LoopFillZerobss
  8000538:	e001      	b.n	800053e <LoopFillZerobss>
 
 0800053a <FillZerobss>:
-
-FillZerobss:
-  str  r3, [r2]
  800053a:	6013      	str	r3, [r2, #0]
-  adds r2, r2, #4
  800053c:	3204      	adds	r2, #4
 
 0800053e <LoopFillZerobss>:
-
-LoopFillZerobss:
-  cmp r2, r4
  800053e:	42a2      	cmp	r2, r4
-  bcc FillZerobss
  8000540:	d3fb      	bcc.n	800053a <FillZerobss>
-
-/* Call the clock system intitialization function.*/
-  bl  SystemInit
  8000542:	f7ff ffe3 	bl	800050c <SystemInit>
-/* Call static constructors */
-  bl __libc_init_array
  8000546:	f000 f829 	bl	800059c <__libc_init_array>
-/* Call the application's entry point.*/
-  bl main
  800054a:	f7ff fe81 	bl	8000250 <main>
 
 0800054e <LoopForever>:
-
-LoopForever:
-    b LoopForever
  800054e:	e7fe      	b.n	800054e <LoopForever>
-  ldr   r0, =_estack
  8000550:	20004000 	.word	0x20004000
-  ldr r0, =_sdata
  8000554:	20000000 	.word	0x20000000
-  ldr r1, =_edata
  8000558:	20000068 	.word	0x20000068
-  ldr r2, =_sidata
  800055c:	08001678 	.word	0x08001678
-  ldr r2, =_sbss
  8000560:	20000068 	.word	0x20000068
-  ldr r4, =_ebss
  8000564:	2000009c 	.word	0x2000009c
 
 08000568 <ADC1_IRQHandler>:
- * @retval : None
-*/
-    .section .text.Default_Handler,"ax",%progbits
-Default_Handler:
-Infinite_Loop:
-  b Infinite_Loop
  8000568:	e7fe      	b.n	8000568 <ADC1_IRQHandler>
 	...
 
 0800056c <HAL_IncTick>:
-  * @note This function is declared as __weak to be overwritten in case of other 
-  *       implementations in user file.
-  * @retval None
-  */
-__weak void HAL_IncTick(void)
-{
  800056c:	b580      	push	{r7, lr}
  800056e:	af00      	add	r7, sp, #0
-  uwTick += uwTickFreq;
  8000570:	4b05      	ldr	r3, [pc, #20]	; (8000588 <HAL_IncTick+0x1c>)
  8000572:	781b      	ldrb	r3, [r3, #0]
  8000574:	001a      	movs	r2, r3
@@ -972,7 +684,6 @@ __weak void HAL_IncTick(void)
  800057a:	18d2      	adds	r2, r2, r3
  800057c:	4b03      	ldr	r3, [pc, #12]	; (800058c <HAL_IncTick+0x20>)
  800057e:	601a      	str	r2, [r3, #0]
-}
  8000580:	46c0      	nop			; (mov r8, r8)
  8000582:	46bd      	mov	sp, r7
  8000584:	bd80      	pop	{r7, pc}

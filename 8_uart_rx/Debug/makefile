@@ -60,8 +60,8 @@ all: main-build
 main-build: 8_uart_rx.elf secondary-outputs
 
 # Tool invocations
-8_uart_rx.elf 8_uart_rx.map: $(OBJS) $(USER_OBJS) /Users/Izzel/Documents/STM32Workspace/STM32\ Baremetal\ Workspace.zip_expanded/STM32\ Baremetal\ Workspace/8_uart_rx/STM32F070RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "8_uart_rx.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0 -T"/Users/Izzel/Documents/STM32Workspace/STM32 Baremetal Workspace.zip_expanded/STM32 Baremetal Workspace/8_uart_rx/STM32F070RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="8_uart_rx.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+8_uart_rx.elf 8_uart_rx.map: $(OBJS) $(USER_OBJS) /Users/Izzel/Documents/STM32Workspace/STM32F070RB/8_uart_rx/STM32F070RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "8_uart_rx.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0 -T"/Users/Izzel/Documents/STM32Workspace/STM32F070RB/8_uart_rx/STM32F070RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="8_uart_rx.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

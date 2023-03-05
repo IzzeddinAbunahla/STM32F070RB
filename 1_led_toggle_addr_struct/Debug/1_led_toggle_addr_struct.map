@@ -160,7 +160,7 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x16 ./Src/syscalls.o
  .debug_macro   0x0000000000000000       0xce ./Src/syscalls.o
  .debug_line    0x0000000000000000      0x830 ./Src/syscalls.o
- .debug_str     0x0000000000000000     0x89b4 ./Src/syscalls.o
+ .debug_str     0x0000000000000000     0x897f ./Src/syscalls.o
  .comment       0x0000000000000000       0x51 ./Src/syscalls.o
  .debug_frame   0x0000000000000000      0x244 ./Src/syscalls.o
  .ARM.attributes
@@ -222,7 +222,7 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x6a ./Src/sysmem.o
  .debug_macro   0x0000000000000000      0x1df ./Src/sysmem.o
  .debug_line    0x0000000000000000      0x526 ./Src/sysmem.o
- .debug_str     0x0000000000000000     0x5cf0 ./Src/sysmem.o
+ .debug_str     0x0000000000000000     0x5cbb ./Src/sysmem.o
  .comment       0x0000000000000000       0x51 ./Src/sysmem.o
  .debug_frame   0x0000000000000000       0x30 ./Src/sysmem.o
  .ARM.attributes
@@ -541,11 +541,11 @@ LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.id
  .debug_line    0x0000000000000000      0x3c6 ./Src/main.o
  .debug_line    0x00000000000003c6       0x84 ./Startup/startup_stm32f070rbtx.o
 
-.debug_str      0x0000000000000000     0x3c1a
- .debug_str     0x0000000000000000     0x3be9 ./Src/main.o
-                                       0x3d4d (size before relaxing)
- .debug_str     0x0000000000003be9       0x31 ./Startup/startup_stm32f070rbtx.o
-                                         0xb7 (size before relaxing)
+.debug_str      0x0000000000000000     0x3be5
+ .debug_str     0x0000000000000000     0x3bb4 ./Src/main.o
+                                       0x3d18 (size before relaxing)
+ .debug_str     0x0000000000003bb4       0x31 ./Startup/startup_stm32f070rbtx.o
+                                         0x82 (size before relaxing)
 
 .comment        0x0000000000000000       0x50
  .comment       0x0000000000000000       0x50 ./Src/main.o

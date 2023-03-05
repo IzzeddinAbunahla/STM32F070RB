@@ -60,8 +60,8 @@ all: main-build
 main-build: 7_uart_modular.elf secondary-outputs
 
 # Tool invocations
-7_uart_modular.elf 7_uart_modular.map: $(OBJS) $(USER_OBJS) C:\Users\Izzel\Documents\School\Engineering\ Physics\ V\ 2022-2023\Embedded\STM32\ Baremetal\ Workspace\7_uart_modular\STM32F070RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "7_uart_modular.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0 -T"C:\Users\Izzel\Documents\School\Engineering Physics V 2022-2023\Embedded\STM32 Baremetal Workspace\7_uart_modular\STM32F070RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="7_uart_modular.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+7_uart_modular.elf 7_uart_modular.map: $(OBJS) $(USER_OBJS) /Users/Izzel/Documents/STM32Workspace/STM32F070RB/7_uart_modular/STM32F070RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "7_uart_modular.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0 -T"/Users/Izzel/Documents/STM32Workspace/STM32F070RB/7_uart_modular/STM32F070RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="7_uart_modular.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
