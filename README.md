@@ -6,7 +6,7 @@
 * [LED Toggle Using Standard Peripheral Header Files](#2)
 * [LED Toggle Using Bit Set Reset Register](#3)
 * [Configuring GPIO Input for LED Button Press](#4)
-<a name="intro"/>
+
 ## Introduction
 In this Repository, I will extensively explore and document the use of this microcontroller and understanding of its function. I will create simple functions to demontstrate a feature of this device. Each involvement of a feature is distinguished by its number prefixed onto the section name. The aim of this repository is to aid in the understanding of ARM Cortex STM32 based MCUs, it can be translated very easily onto different models you would just have to check the relevant datasheet, reference manual, and user manual for your MCU/devkit and use the correct memory addresses for peripheral function or a HAL. I used the STM32CubeIDE for this project.
 
