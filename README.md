@@ -1,4 +1,4 @@
-##### Table of Contents  
+### Table of Contents  
 * [Introduction](#intro)  
 * [What Hardware did i use?](#desc)
 * [LED Toggle Using Memory Address](#0)
@@ -8,11 +8,13 @@
 * [Configuring GPIO Input for LED Button Press](#4)
 
 <a name="intro"/>
-# Introduction
+## Introduction
 In this Repository, I will extensively explore and document the use of this microcontroller and understanding of its function. I will create simple functions to demontstrate a feature of this device. Each involvement of a feature is distinguished by its number prefixed onto the section name. The aim of this repository is to aid in the understanding of ARM Cortex STM32 based MCUs, it can be translated very easily onto different models you would just have to check the relevant datasheet, reference manual, and user manual for your MCU/devkit and use the correct memory addresses for peripheral function or a HAL. I used the STM32CubeIDE for this project.
+
 <a name="desc"/>
 ## What Hardware did i use?
-In this project i used the STM32F070RB, it is an ARM Cortex-M0 based microcontroller. 
+In this project i used the STM32F070RB, it is an ARM Cortex-M0 based microcontroller.
+
 <a name="0"/>
 ## LED Toggle Using Memory Address (0_led_toggle_addr)
 The code is written in the main.c file and configures the microcontroller's General-Purpose Input/Output (GPIO) pins to have a blinking LED.
@@ -28,6 +30,7 @@ The code has manually defined memory addresses and registers related to the micr
 It is worth noting that the code uses a for loop with a fixed delay of 100000 in order to blink the LED. This delay can be adjusted to change the blink frequency of the LED.
 
 PS: This code uses direct memory manipulation to control the peripherals, it is not recommended to use this method in normal cases, it is preferred to use HAL or LL libraries to access the registers of the microcontroller.
+
 <a name="1"/>
 ## LED Toggle Using Structures (1_led_toggle_addr_struct)
 Following the previous code, this code initializes and configures the microcontroller's GPIOA (General Purpose Input/Output Port A) to control an LED connected to pin 5 on port A.
@@ -41,6 +44,7 @@ In the main() function, the code first enables clock access to the GPIOA periphe
 Then, it sets PA5 as output pin by setting the corresponding bit in the GPIOA->MODER register.
 
 It then enters an infinite loop, in which it repeatedly toggles the state of the LED connected to pin 5 of port A by toggling the corresponding bit in the GPIOA->ODR register. It also includes a delay by using a for loop.
+
 <a name="2"/>
 ## LED Toggle Using Standard Peripheral Library Header files (2_gpio_output)
 This code performs the following tasks:
@@ -65,8 +69,9 @@ The code performs the following tasks:
 
 The changes from the previous code is as follows:
 1. Instead of using the ODR register to toggle the state of the LED, the code uses the bit set reset register (BSRR) to set (1) and reset (0) the LED pin.
+
 <a name="4"/>
-# Configuring GPIO Input for LED Button Press (4_gpio_input)
+## Configuring GPIO Input for LED Button Press (4_gpio_input)
 In this code two ports, GPIOA and GPIOC, are used and one pin from each port is set as an output (GPIOA Pin 5) and input (GPIOC Pin 13) respectively. The code also enables clock access to the two ports by setting the appropriate bits in the RCC AHBENR register.
 
 In the infinite loop, the code checks the state of the input pin, or otherwise the button in this case (PC13) by reading its value from the GPIOC input data register (IDR). If the button is not pressed (it is at a high state), the LED on GPIOA Pin 5 is turned on by setting the corresponding bit in the GPIOA BSRR register. If the button is pressed (it is at a low state), the LED on GPIOA Pin 5 is turned off by resetting the corresponding bit in the GPIOA BSRR register.
