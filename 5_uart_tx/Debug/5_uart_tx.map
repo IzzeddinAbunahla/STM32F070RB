@@ -583,9 +583,9 @@ LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.id
  .debug_macro   0x000000000000145f     0x764e ./Src/main.o
  .debug_macro   0x0000000000008aad       0x3c ./Src/main.o
 
-.debug_line     0x0000000000000000      0x5fc
- .debug_line    0x0000000000000000      0x578 ./Src/main.o
- .debug_line    0x0000000000000578       0x84 ./Startup/startup_stm32f070rbtx.o
+.debug_line     0x0000000000000000      0x5fb
+ .debug_line    0x0000000000000000      0x577 ./Src/main.o
+ .debug_line    0x0000000000000577       0x84 ./Startup/startup_stm32f070rbtx.o
 
 .debug_str      0x0000000000000000    0x2e876
  .debug_str     0x0000000000000000    0x2e845 ./Src/main.o

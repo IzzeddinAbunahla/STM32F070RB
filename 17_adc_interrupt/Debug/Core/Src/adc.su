@@ -1,0 +1,5 @@
+../Drivers/CMSIS/Include/core_cm0.h:623:22:__NVIC_EnableIRQ	16	static
+../Core/Src/adc.c:17:6:PA1_adc_interrupt_init	8	static
+../Core/Src/adc.c:42:6:PA1_adc_init	8	static
+../Core/Src/adc.c:62:6:start_conversion	8	static
+../Core/Src/adc.c:70:10:adc_read	8	static

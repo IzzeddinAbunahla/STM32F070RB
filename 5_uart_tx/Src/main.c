@@ -4,10 +4,10 @@
 #define GPIO_A_EN	(1U<<17) //enable bit 17 in RCC AHB register for port A
 #define UART2EN		(1U<<17)
 
-#define SYS_FREQ	8000000
+#define SYS_FREQ	8000000 //Clock speed of the STM32F070RB MCU
 #define APB1_CLK	SYS_FREQ
 
-#define UART_BAUDRATE 9600
+#define UART_BAUDRATE 9600 //Baud rate or bits per second
 #define CR1_TE		(1U<<3)
 #define CR1_UART_EN	(1U<<0)
 #define SR_TXE		(1U<<7)
@@ -15,16 +15,15 @@
 //Function prototypes;
 static void uart_set_baudrate(USART_TypeDef *USARTx, uint32_t PeriphClk, uint32_t Baudrate);
 static uint16_t compute_uart_BD(uint32_t PeriphClk, uint32_t Baudrate);
-
 void uart2_write(int ch);
 void uar2_tx_init(void);
 
 int main (void)
 {
-		uar2_tx_init();
+		uar2_tx_init(); //Initialize TX of the MCU
 		while(1)
 		{
-			uart2_write('Y');
+			uart2_write('Y'); //Send this character via UART serial
 		}
 }
 

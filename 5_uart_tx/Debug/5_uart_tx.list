@@ -37,11 +37,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  16 .debug_macro  00008ae9  00000000  00000000  00010a90  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   000005fc  00000000  00000000  00019579  2**0
+ 17 .debug_line   000005fb  00000000  00000000  00019579  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    0002e876  00000000  00000000  00019b75  2**0
+ 18 .debug_str    0002e876  00000000  00000000  00019b74  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000050  00000000  00000000  000483eb  2**0
+ 19 .comment      00000050  00000000  00000000  000483ea  2**0
                   CONTENTS, READONLY
  20 .debug_frame  000000f4  00000000  00000000  0004843c  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
@@ -228,7 +228,7 @@ Disassembly of section .text:
  800021e:	46c0      	nop			; (mov r8, r8)
 
 08000220 <main>:
-
+static uint16_t compute_uart_BD(uint32_t PeriphClk, uint32_t Baudrate);
 void uart2_write(int ch);
 void uar2_tx_init(void);
 
@@ -236,11 +236,11 @@ int main (void)
 {
  8000220:	b580      	push	{r7, lr}
  8000222:	af00      	add	r7, sp, #0
-		uar2_tx_init();
+		uar2_tx_init(); //Initialize TX of the MCU
  8000224:	f000 f804 	bl	8000230 <uar2_tx_init>
 		while(1)
 		{
-			uart2_write('Y');
+			uart2_write('Y'); //Send this character via UART serial
  8000228:	2059      	movs	r0, #89	; 0x59
  800022a:	f000 f861 	bl	80002f0 <uart2_write>
  800022e:	e7fb      	b.n	8000228 <main+0x8>
