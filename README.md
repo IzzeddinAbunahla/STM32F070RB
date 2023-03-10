@@ -20,7 +20,7 @@ In this project i used the STM32F070RB, it is an ARM Cortex-M0 based microcontro
 <a name="0"/>
 
 ## LED Toggle Using Memory Address (0_led_toggle_addr)
-The code is written in the main.c file and configures the microcontroller's General-Purpose Input/Output (GPIO) pins to have a blinking LED.
+The code is written in the main.c file and configures the microcontroller's General-Purpose Input/Output (GPIO) pins to program a blinking LED.
 
 The code has manually defined memory addresses and registers related to the microcontroller's clock, GPIO, and RCC (Reset and Clock Control) modules. These definitions allow the code to access specific registers and memory locations within the microcontroller in order to control its behavior.
 
@@ -28,26 +28,23 @@ The code has manually defined memory addresses and registers related to the micr
 1. It enables clock access to the GPIOA peripheral by setting bit 17 of the RCC_AHBEN_R register to 1.
 2. It configures pin PA5 as an output pin by setting bit 10 of the GPIOA_MODE_R register to 1 and clearing bit 11 of the same register.
 3. It sets PA5 high by setting bit 5 of the GPIOA_OD_R register to 1.
-4. It toggles PA5, by XORing it with PIN5, and this creates a loop where the LED blinks continuously.
+4. It toggles PA5, by XORing it with PIN5, and this creates a loop where the LED blinks continuously with a fixed delay.
 
-It is worth noting that the code uses a for loop with a fixed delay of 100000 in order to blink the LED. This delay can be adjusted to change the blink frequency of the LED.
 
-PS: This code uses direct memory manipulation to control the peripherals, it is not recommended to use this method in normal cases, it is preferred to use HAL or LL libraries to access the registers of the microcontroller.
+PS: It is worth noting this project uses direct memory manipulation to control the peripherals, it is not recommended to use this method in normal cases, it is preferred to use HAL or LL libraries to access the registers of the microcontroller.
 
 <a name="1"/>
 
 ## LED Toggle Using Structures (1_led_toggle_addr_struct)
-Following the previous code, this code initializes and configures the microcontroller's GPIOA (General Purpose Input/Output Port A) to control an LED connected to pin 5 on port A.
+Following the previous project, this project initializes and configures the microcontroller's GPIOA (General Purpose Input/Output Port A) to control an LED connected to pin 5 on port A.
 
 A number of constants are used to set the addresses of various registers and peripherals within the microcontroller's memory. This includes the base addresses for the AHB2 (Advanced High-performance Bus 2) and AHB1 (Advanced High-performance Bus 1) peripherals, as well as the RCC (Reset and Clock Control) register.
 
 The code then defines two structs, "GPIO_TypeDef" and "RCC_TypeDef", which are used to access the memory-mapped registers of the GPIOA and RCC peripherals respectively.
 
-In the main() function, the code first enables clock access to the GPIOA peripheral by setting the appropriate bit in the RCC->AHBENR register.
+In the main() function, first clock access is enabled for GPIOA via the AHB by setting the appropriate bit in the (RCC->AHBENR) RCC register and sets PA5 as output pin by setting the corresponding bit in the (GPIOA->MODER) mode register.
 
-Then, it sets PA5 as output pin by setting the corresponding bit in the GPIOA->MODER register.
-
-It then enters an infinite loop, in which it repeatedly toggles the state of the LED connected to pin 5 of port A by toggling the corresponding bit in the GPIOA->ODR register. It also includes a delay by using a for loop.
+Using an infinite loop, it repeatedly toggles the state of the LED connected to pin 5 of port A by toggling the corresponding bit in the (GPIOA->ODR) output data register. It also includes a delay by using a for loop.
 
 <a name="2"/>
 
@@ -98,3 +95,5 @@ In the infinite loop, the code checks the state of the input pin, or otherwise t
       - If the state of the pin is high (the button is not pressed), the LED is turned on by setting the 5th bit of the GPIOA BSRR (bit set/reset) register.
       - If the state of the pin is low (the button is pressed), the LED is turned off by resetting the 21st bit of the GPIOA BSRR register.
       - The loop repeats indefinitely, continuously checking the state of the button and turning the LED on or off accordingly.
+
+# ...UNDER CONSTRUCTION...
